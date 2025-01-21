@@ -59,4 +59,10 @@ public class ProductService {
         }
         return false;
     }
+
+    public Optional<Product> getProductById(Long id) {
+        if (productRepository.existsById(id))
+            return productRepository.findById(id);
+        return Optional.empty();
+    }
 }

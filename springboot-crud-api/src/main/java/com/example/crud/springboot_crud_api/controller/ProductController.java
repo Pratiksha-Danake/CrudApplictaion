@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -40,5 +41,14 @@ public class ProductController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
         }
+    }
+
+    @GetMapping("/product/{id}")
+    public ResponseEntity<Object> getProductById(@PathVariable Long id){
+        Optional<Product> product = productService.getProductById(id);
+        if (product.isPresent())
+            return ResponseEntity.status(HttpStatus.FOUND).body(product);
+        else
+            return ResponseEntity.status(HttpStatus.OK).body("Product Do not exist for given Id");
     }
 }
