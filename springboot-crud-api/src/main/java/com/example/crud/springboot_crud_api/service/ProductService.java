@@ -50,4 +50,13 @@ public class ProductService {
         }
         return null;
     }
+
+    @Transactional
+    public boolean deleteProduct(Long id) {
+        if (productRepository.existsById(id)) {
+            productRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }

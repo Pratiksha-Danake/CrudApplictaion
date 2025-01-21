@@ -31,4 +31,14 @@ public class ProductController {
                     .body("An error occurred while saving the product.");
         }
     }
+
+    @DeleteMapping("/product/{id}")
+    public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
+        boolean isDeleted = productService.deleteProduct(id);
+        if (isDeleted) {
+            return ResponseEntity.ok("Product deleted successfully.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
+        }
+    }
 }
