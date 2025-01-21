@@ -1,16 +1,20 @@
 package com.example.crud.springboot_crud_api.model.entity;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.*;
+import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "product")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Getter
-@Setter
+@Builder
+@Transactional
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,7 +25,9 @@ public class Product {
 
     private double price;
 
-    @ManyToOne
-    @JoinColumn(name = "categoryId", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id", nullable = false)
+    @JsonIgnoreProperties({"products", "hibernateLazyInitializer", "handler"})
     private Category category;
+
 }
