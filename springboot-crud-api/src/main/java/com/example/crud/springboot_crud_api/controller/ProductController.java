@@ -51,4 +51,13 @@ public class ProductController {
         else
             return ResponseEntity.status(HttpStatus.OK).body("Product Do not exist for given Id");
     }
+
+//    @PutMapping("/product/{id}")
+//    public ResponseEntity<Object> updateProductDetails(@PathVariable Long id, @RequestBody CreateProductRequestDto requestDto){
+//        Optional<Product> updatedProduct = productService.updateProduct(id, requestDto);
+//        if (updatedProduct.isPresent())
+//            return ResponseEntity.status(HttpStatus.OK).body(updatedProduct);
+//        else
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product Do not exist for given Id..Unable to Update");
+//    }
 }
